@@ -22,6 +22,7 @@ public class stepDefinition {
     public void launchHelpdeskURL(String url) {
         ispassed = false;
         try {
+            DriverAction.waitSec(5);
             DriverAction.waitUntilElementAppear(locator.loginBtn, 15);
             String extractedURL = DriverAction.getCurrentURL();
             List<WebElement> presentImages = DriverAction.getElements(locator.loginImages);
@@ -51,6 +52,7 @@ public class stepDefinition {
     public void clickOnButton(String loginBtn) {
         ispassed=false;
         try{
+            DriverAction.waitSec(5);
             if(DriverAction.isExist(locator.loginBtn)){
                DriverAction.click(locator.loginBtn);
                 ispassed=true;
@@ -64,7 +66,7 @@ public class stepDefinition {
     public void verifyIfUserIsSuccessfullyLoginIntoHelpdesk() {
         ispassed=false;
         try{
-
+DriverAction.waitSec(30);
         }catch (Exception ex){
             ispassed=false;
         }
