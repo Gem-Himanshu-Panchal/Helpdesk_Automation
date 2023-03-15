@@ -22,7 +22,6 @@ public class stepDefinition {
     public void launchHelpdeskURL(String url) {
         ispassed = false;
         try {
-            DriverAction.waitSec(5);
             DriverAction.waitUntilElementAppear(locator.loginBtn, 15);
             String extractedURL = DriverAction.getCurrentURL();
             List<WebElement> presentImages = DriverAction.getElements(locator.loginImages);
@@ -43,6 +42,7 @@ public class stepDefinition {
             GemTestReporter.addTestStep("Verify if Helpdesk URL is launched",
                     "Unable to launch Helpdesk URL", STATUS.FAIL, DriverAction.takeSnapShot());
     }
+
     @And("test")
     public void test() {
         System.out.println("nil");
@@ -50,33 +50,38 @@ public class stepDefinition {
 
     @And("Click on {string} button")
     public void clickOnButton(String loginBtn) {
-        ispassed=false;
-        try{
+        ispassed = false;
+        try {
             DriverAction.waitSec(5);
-            if(DriverAction.isExist(locator.loginBtn)){
-               DriverAction.click(locator.loginBtn);
-                ispassed=true;
+            if (DriverAction.isExist(locator.loginBtn)) {
+                DriverAction.click(locator.loginBtn);
+                ispassed = true;
             }
-        }catch (Exception ex){
-            ispassed=false;
+        } catch (Exception ex) {
+            ispassed = false;
         }
     }
 
     @And("Verify if user is successfully login into helpdesk")
     public void verifyIfUserIsSuccessfullyLoginIntoHelpdesk() {
-        ispassed=false;
-        try{
-DriverAction.waitSec(30);
-        }catch (Exception ex){
-            ispassed=false;
+        ispassed = false;
+        try {
+            DriverAction.waitUntilElementAppear(locator.gemLogo, 30);
+            if (DriverAction.isExist(locator.gemLogo) && DriverAction.isExist(locator.loginHeader) && DriverAction.isExist(locator.logoutBtn)
+                    && DriverAction.isExist(locator.createNewTicketBtn) && DriverAction.isExist(locator.searchTicketInput) &&
+                    DriverAction.isExist(locator.ticketColumnHeader) && DriverAction.isExist(locator.existingTicketRow) &&
+                    DriverAction.isExist(locator.filterButton))
+                ispassed = true;
+        } catch (Exception ex) {
+            ispassed = false;
         }
         if (ispassed)
-            GemTestReporter.addTestStep("Verify if Helpdesk URL is launched",
-                    "Helpdesk URL is launched",
+            GemTestReporter.addTestStep("Verify if user successfully logged in",
+                    "User is on Helpdesk home page",
                     STATUS.PASS, DriverAction.takeSnapShot());
         else
-            GemTestReporter.addTestStep("Verify if Helpdesk URL is launched",
-                    "Unable to launch Helpdesk URL", STATUS.FAIL, DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify if user successfully logged in",
+                    "User is unable to go on home page", STATUS.FAIL, DriverAction.takeSnapShot());
     }
 }
 
