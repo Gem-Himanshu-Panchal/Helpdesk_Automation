@@ -45,7 +45,7 @@ public class stepDefinition {
 
     @And("test")
     public void test() {
-        System.out.println("nil");
+        System.out.println("hello world");
     }
 
     @And("Click on {string} button")
