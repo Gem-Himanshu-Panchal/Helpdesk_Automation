@@ -1,5 +1,6 @@
 package com.qa.helpdesk.Locators;
 
+
 import org.openqa.selenium.By;
 
 public class locator {
@@ -19,5 +20,14 @@ public class locator {
     public static By ticketColumnHeader = By.xpath("//thead[@class='MuiTableHead-root css-1wbz3t9']");
     public static By existingTicketRow = By.xpath("//tbody//tr");
     public static By filterButton = By.xpath("//div[@class='filters_mainDiv__GagIi']//button");
+
+    public static By loginElements(String text){
+        switch (text){
+            case "email": return By.xpath("//input[@type='email']");
+            case "next": return By.xpath("//input[@type='submit']");
+            case "password": return By.xpath("//input[@type='password']");
+            default:return null;
+        }
+    }
 }
 

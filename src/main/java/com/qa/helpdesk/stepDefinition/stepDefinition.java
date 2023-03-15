@@ -12,8 +12,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.reflections.vfs.Vfs;
 
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class stepDefinition {
     boolean ispassed = false;
@@ -52,11 +54,29 @@ public class stepDefinition {
     public void clickOnButton(String loginBtn) {
         ispassed = false;
         try {
-            DriverAction.waitSec(5);
+            DriverAction.waitSec(3);
             if (DriverAction.isExist(locator.loginBtn)) {
                 DriverAction.click(locator.loginBtn);
-                ispassed = true;
             }
+            DriverAction.waitSec(3);
+            Properties login = new Properties();
+            try (FileReader in = new FileReader(".idea/login.properties")) {
+                login.load(in);
+            }
+            String username = login.getProperty("username");
+            String password = login.getProperty("password");
+            System.out.println(username+" "+password);
+            if(DriverAction.isExist(locator.loginElements("email"))){
+                DriverAction.typeText(locator.loginElements("email"),username);
+                DriverAction.click(locator.loginElements("next"));
+                DriverAction.waitSec(2);
+                DriverAction.typeText(locator.loginElements("password"),password);
+                DriverAction.click(locator.loginElements("next"));
+                DriverAction.waitSec(2);
+                DriverAction.click(locator.loginElements("next"));
+                ispassed=true;
+            }
+
         } catch (Exception ex) {
             ispassed = false;
         }
