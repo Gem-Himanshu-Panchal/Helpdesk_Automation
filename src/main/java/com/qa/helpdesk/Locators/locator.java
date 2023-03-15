@@ -5,13 +5,19 @@ import org.openqa.selenium.By;
 
 public class locator {
     //LOGIN PAGE
-public static By elementWithText(String typeOfElement,String elementText){
-    switch (typeOfElement){
+public static By elementWithText(String elementType,String elementText){
+    switch (elementType){
         case "button": return By.xpath("//button[contains(text(),'"+elementText+"')]");
         case "div": return By.xpath("//div[contains(text(),'"+elementText+"')]");
         case "para": return By.xpath("//p[contains(text(),'"+elementText+"')]");
         case "image": return By.xpath("//img[@alt='"+elementText+"']");
         case "span": return By.xpath("//span[contains(text(),'"+elementText+"')]");
+        default:return null;
+    }
+}
+public static By elementByClass(String elementType, String classValue){
+    switch (elementType){
+        case "div":return By.xpath("//div[@class='"+classValue+"']");
         default:return null;
     }
 }
@@ -30,6 +36,8 @@ public static By elementWithText(String typeOfElement,String elementText){
     //CONTACT US DIALOG BOX
     public static By contactUsModalBox = By.xpath("//div[@class='modal-content']");
 
+    //NOTIFICATION DIALOG BOX
+    public static By notificationModalBox = By.xpath("//div[@class='notification_container__7wGjb']");
 
 }
 

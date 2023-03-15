@@ -107,6 +107,7 @@ public class stepDefinition {
                     "User is unable to step on helpdesk home page", STATUS.FAIL, DriverAction.takeSnapShot());
     }
 
+    //CONTACT US
     @Given("Click on {string} icon")
     public void click_On_Icon(String iconName) {
         passed = false;
@@ -159,12 +160,82 @@ public class stepDefinition {
             System.out.println(ex);
         }
         if (passed)
-            GemTestReporter.addTestStep("Verify if '"+element+"' is clickable",
+            GemTestReporter.addTestStep("Verify if '" + element + "' is clickable",
                     "Email is clickable",
                     STATUS.PASS, DriverAction.takeSnapShot());
         else
-            GemTestReporter.addTestStep("Verify if '"+element+"' is clickable",
+            GemTestReporter.addTestStep("Verify if '" + element + "' is clickable",
                     "Email is not clickable", STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+
+    //    NOTIFICATIONS
+    @Then("Verify if {string} dialog box opens")
+    public void verify_If_Dialog_Box_Opens(String headerText) {
+        passed = false;
+        try {
+            if (DriverAction.isExist(locator.notificationModalBox)
+                    && DriverAction.isExist(locator.elementWithText("span", headerText)))
+                passed = true;
+        } catch (Exception ex) {
+            passed = false;
+            System.out.println(ex);
+        }
+        if (passed)
+            GemTestReporter.addTestStep("Check if " + headerText + " dialog box opens",
+                    headerText + " dialog box is present",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check if " + headerText + " dialog box opens",
+                    headerText + " dialog box is missing", STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+    @Then("Verify {string} and {string} are present on dialog box")
+    public void verifyAndArePresentOnDialogBox(String image, String text) {
+        passed = false;
+        try {
+            if (DriverAction.isExist(locator.elementWithText("image", image))
+                    && DriverAction.isExist(locator.elementWithText("div", text)))
+                passed = true;
+        } catch (Exception ex) {
+            passed = false;
+            System.out.println(ex);
+        }
+        if (passed)
+            GemTestReporter.addTestStep("Verify if all elements are present in notifications dialog box",
+                    "All elements are present",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if all elements are present in notifications dialog box",
+                    "Elements are missing", STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+    @And("Click on {string} button")
+    public void clickOnButton(String btnText) {
+        passed = false;
+        try {
+            if (DriverAction.isExist(locator.elementWithText("div", btnText))) {
+                DriverAction.click(locator.elementWithText("div", btnText));
+                passed = true;
+            }
+        } catch (Exception ex) {
+            passed = false;
+            System.out.println(ex);
+        }
+    }
+
+
+    @And("Click on {string} to close it")
+    public void clickOnToCloseIt(String classValue) {
+        passed = false;
+        try {
+            if (DriverAction.isExist(locator.elementByClass("div", classValue))) {
+                DriverAction.click(locator.elementByClass("div", classValue));
+            }
+        } catch (Exception ex) {
+            passed = false;
+            System.out.println(ex);
+        }
     }
 }
 
