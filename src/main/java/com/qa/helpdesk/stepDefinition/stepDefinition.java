@@ -226,7 +226,7 @@ public class stepDefinition {
 
 
     @And("Click on {string} to close it")
-    public void clickOnToCloseIt(String classValue) {
+    public void click_On_Element_To_Close_It(String classValue) {
         passed = false;
         try {
             if (DriverAction.isExist(locator.elementByClass("div", classValue))) {
