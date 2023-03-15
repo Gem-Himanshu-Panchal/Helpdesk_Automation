@@ -1,11 +1,11 @@
 {
-  "environment": "dev",
+  "environment": "prod",
   "projectName": "Helpdesk",
   "reportName": "Helpdesk_Report",
   "glueCode":"com.qa.helpdesk.stepDefinition",
-  "dev": {
+  "prod": {
     "browserName": "chrome",
-    "launchUrl": "https://helpdeskui-np.geminisolutions.com/#",
+    "launchUrl": "https://helpdesk.geminisolutions.com/",
     "browserTimeout": 100
   },
   "beta": {
