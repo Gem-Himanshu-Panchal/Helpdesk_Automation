@@ -67,13 +67,13 @@ public class stepDefinition {
             String password = login.getProperty("password");
             System.out.println(username+" "+password);
             if(DriverAction.isExist(locator.loginElements("email"))){
-                DriverAction.typeText(locator.loginElements("email"),username);
-                DriverAction.click(locator.loginElements("next"));
+                DriverAction.getElement(locator.loginElements("email")).sendKeys(username);
+                DriverAction.getElement(locator.loginElements("next")).click();
                 DriverAction.waitSec(2);
-                DriverAction.typeText(locator.loginElements("password"),password);
-                DriverAction.click(locator.loginElements("next"));
+                DriverAction.getElement(locator.loginElements("password")).sendKeys(password);
+                DriverAction.getElement(locator.loginElements("next")).click();
                 DriverAction.waitSec(2);
-                DriverAction.click(locator.loginElements("next"));
+                DriverAction.getElement(locator.loginElements("next")).click();
                 ispassed=true;
             }
 
